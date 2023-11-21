@@ -77,12 +77,72 @@ fetchData()
 
 
                 sepet.forEach(urun => {
-                    const urunAdi = document.createElement('p')
-                    urunAdi.textContent = urun.title
+
+                    const parentDiv = document.createElement('div')
+                    parentDiv.style.width = '100%'
+                    parentDiv.style.border = "1px solid black"
+                    parentDiv.style.borderRadius = "10px"
+                    parentDiv.style.display = 'flex'
+                    parentDiv.style.justifyContent = 'space-between'
+                    parentDiv.style.alignItems = 'center'
+                    parentDiv.style.marginTop = "10px"
+
+                    const imgDiv = document.createElement('div')
+                    imgDiv.style.width = '25%'
+                    imgDiv.style.height = '80px'
+                    imgDiv.style.overflow = "hidden"
+
+                    const img = document.createElement('img')
+                    img.src = urun.image
+                    img.style.width = '100%'
+                    img.style.height = '100%'
+                    img.style.borderRadius = "10px"
+
+                    const baslik = document.createElement('p')
+                    baslik.textContent = urun.title
+                    baslik.style.fontSize = "12px"
+                    baslik.style.marginTop = "18px"
+
+                    const fiyat = document.createElement('p')
+                    fiyat.textContent = urun.price + '$'
+                    fiyat.style.fontSize = '15px'
+                    fiyat.style.fontWeight = 'bold'
+                    fiyat.style.marginTop = "18px"
 
 
-                    cart.append(urunAdi)
 
+                    const silmeBtn = document.createElement('i')
+                    silmeBtn.classList.add('fa-solid', 'fa-trash')
+
+
+                    silmeBtn.addEventListener('click', function () {
+                        console.log(this.parentElement)
+                        let gorseldenSilme = this.parentElement
+                        gorseldenSilme.remove()
+
+
+                        console.log(normalSepet.indexOf(urun))
+
+                        let urunIndex = normalSepet.indexOf(urun)
+
+                        console.log(normalSepet.splice(urunIndex, 1))
+                        console.log(normalSepet)
+
+                        let normalSepetJson = JSON.stringify(normalSepet)
+                        localStorage.setItem('sepet', normalSepetJson)
+
+                    })
+
+
+
+                    imgDiv.append(img)
+
+                    parentDiv.append(imgDiv)
+                    parentDiv.append(baslik)
+                    parentDiv.append(fiyat)
+                    parentDiv.append(silmeBtn)
+
+                    cart.append(parentDiv)
                 })
 
                 let sepetJSON = JSON.stringify(sepet)
@@ -132,8 +192,75 @@ let normalSepet = JSON.parse(localSepet)
 console.log(normalSepet)
 
 normalSepet.forEach(urun => {
+
+    const parentDiv = document.createElement('div')
+    parentDiv.style.width = '100%'
+    parentDiv.style.border = "1px solid black"
+    parentDiv.style.borderRadius = "10px"
+    parentDiv.style.display = 'flex'
+    parentDiv.style.justifyContent = 'space-between'
+    parentDiv.style.alignItems = 'center'
+    parentDiv.style.marginTop = "10px"
+
+    const imgDiv = document.createElement('div')
+    imgDiv.style.width = '25%'
+    imgDiv.style.height = '80px'
+    imgDiv.style.overflow = "hidden"
+
+    const img = document.createElement('img')
+    img.src = urun.image
+    img.style.width = '100%'
+    img.style.height = '100%'
+    img.style.borderRadius = "10px"
+
     const baslik = document.createElement('p')
     baslik.textContent = urun.title
+    baslik.style.fontSize = "12px"
+    baslik.style.marginTop = "18px"
 
-    cart.append(baslik)
+    const fiyat = document.createElement('p')
+    fiyat.textContent = urun.price + '$'
+    fiyat.style.fontSize = '15px'
+    fiyat.style.fontWeight = 'bold'
+    fiyat.style.marginTop = "18px"
+
+
+
+    const silmeBtn = document.createElement('i')
+    silmeBtn.classList.add('fa-solid', 'fa-trash')
+
+
+    silmeBtn.addEventListener('click', function () {
+        console.log(this.parentElement)
+        let gorseldenSilme = this.parentElement
+        gorseldenSilme.remove()
+
+
+        console.log(normalSepet.indexOf(urun))
+
+        let urunIndex = normalSepet.indexOf(urun)
+
+        console.log(normalSepet.splice(urunIndex, 1))
+        console.log(normalSepet)
+
+        let normalSepetJson = JSON.stringify(normalSepet)
+        localStorage.setItem('sepet', normalSepetJson)
+
+    })
+
+
+
+    imgDiv.append(img)
+
+    parentDiv.append(imgDiv)
+    parentDiv.append(baslik)
+    parentDiv.append(fiyat)
+    parentDiv.append(silmeBtn)
+
+    cart.append(parentDiv)
 })
+
+
+//! git add .
+//! git commit -m "mesaj"
+//! git push
